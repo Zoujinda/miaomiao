@@ -13,8 +13,8 @@
                         <span>177km</span>
                     </div>
                     <div class="card">
-                        <div>小吃</div>
-                        <div>折扣卡</div>
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
                     </div>
                 </li>
                 <li>
@@ -27,8 +27,78 @@
                         <span>1km</span>
                     </div>
                     <div class="card">
-                        <div>小吃</div>
-                        <div>折扣卡</div>
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>益达影院(万达店))</span>
+                        <span class="q"> <span class="price">22.9</span>元起</span>
+                    </div>
+                    <div class="address">
+                        <span>龙岗区坂田街道365号万达广场5楼</span>
+                        <span>1km</span>
+                    </div>
+                    <div class="card">
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>益达影院(万达店))</span>
+                        <span class="q"> <span class="price">22.9</span>元起</span>
+                    </div>
+                    <div class="address">
+                        <span>龙岗区坂田街道365号万达广场5楼</span>
+                        <span>1km</span>
+                    </div>
+                    <div class="card">
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>益达影院(万达店))</span>
+                        <span class="q"> <span class="price">22.9</span>元起</span>
+                    </div>
+                    <div class="address">
+                        <span>龙岗区坂田街道365号万达广场5楼</span>
+                        <span>1km</span>
+                    </div>
+                    <div class="card">
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>益达影院(万达店))</span>
+                        <span class="q"> <span class="price">22.9</span>元起</span>
+                    </div>
+                    <div class="address">
+                        <span>龙岗区坂田街道365号万达广场5楼</span>
+                        <span>1km</span>
+                    </div>
+                    <div class="card">
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>益达影院(万达店))</span>
+                        <span class="q"> <span class="price">22.9</span>元起</span>
+                    </div>
+                    <div class="address">
+                        <span>龙岗区坂田街道365号万达广场5楼</span>
+                        <span>1km</span>
+                    </div>
+                    <div class="card">
+                        <div class="or">小吃</div>
+                        <div class="bl">折扣卡</div>
                     </div>
                 </li>
             </ul>
@@ -65,8 +135,35 @@ export default {
                 .q{
                     font-size: 11px;
                     color: #f03d37;
+                    display: inline-block;
+                    margin-left: 10px;
                     .price{
                         font-size: 18px;
+                    }
+                }
+                .address{
+                    font-size: 13px;
+                    color: #666;
+                    span{
+                        &:last-of-type{
+                            float: right;
+                        }
+                    }
+                }
+                .card{
+                    display: flex;
+                    div{
+                        padding: 0 3px;
+                        height: 15px;
+                        border-radius: 2px;
+                        color: #f90;
+                        border: 1px solid #f90;
+                        font-size: 13px;
+                        margin-right: 5px;
+                    }
+                    .bl{
+                        color: #589daf;
+                        border: 1px solid #589daf;
                     }
                 }
             }

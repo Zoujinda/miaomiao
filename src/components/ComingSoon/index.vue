@@ -1,6 +1,5 @@
 <!--  -->
 <template>
-  <div>
       <div class="movie_body">
           <ul>
             <li>
@@ -113,7 +112,6 @@
             </li>
         </ul>
       </div>
-  </div>
 </template>
 
 <script>
@@ -177,7 +175,7 @@ export default {
                 height: 27px;
                 line-height: 28px;
                 text-align: center;
-                background-color: #f03d37;
+                background-color: #3c9fe6;
                 color: white;
                 border-radius: 4px;
                 font-size: 12px;
