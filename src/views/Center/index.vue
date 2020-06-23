@@ -1,7 +1,6 @@
 <!--  -->
 <template>
   <div id="main">
-    hello center
       <Header title="个人中心"></Header>
       <Login></Login>
       <TabBar></TabBar>

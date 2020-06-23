@@ -4,23 +4,24 @@ import Nowplayingcom from '@/components/NowPlaying/index'
 import Comingsooncom from '@/components/ComingSoon/index'
 import Citycom from '@/components/City/index'
 export default{
-     path: '/movie', component: Moviecom ,
+     // 下面的component的写法是按需引入组件
+     path: '/movie', component: Moviecom,
      children:[
           {
                path:'/movie/city',
-               component:Citycom
+               component: Citycom,
           },
           {
                path:'/movie/comingsoon',
-               component:Comingsooncom
+               component: Comingsooncom,
           },
           {
                path:'/movie/nowplaying',
-               component:Nowplayingcom
+               component: Nowplayingcom,
           },
           {
                path:'/movie/search',
-               component:Searchcom
+               component: Searchcom,
           },
           {
                path:'/movie',

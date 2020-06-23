@@ -1,7 +1,6 @@
 <!--  -->
 <template>
   <div id="main">
-    hello cinema
       <Header title="喵喵影院"></Header>
       <div id="content">
         <div class="cinema_menu">

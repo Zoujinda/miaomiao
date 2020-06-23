@@ -1,28 +1,39 @@
 <!--  -->
 <template>
-  <div>
-      hello search
-      <div class="search_body">
-          <div class="search_input">
-              <div class="search_input_wrapper">
-                  <i class="iconfont icon-sousuo"></i>
-                  <input type="text">
-              </div>
-          </div>
-          <div class="search_result">
-              <h2>电影/电视剧/综艺</h2>
-              <ul>
-                  <li>
-                    <div class="img"><img src="/images/bmw.jpg" alt=""></div>
-                    <div class="info">
-                    <p><span>宝马敞篷</span><span>9.2</span></p>
-                    <p>剧情，热血，激情</p>
-                    <p>2018-11-18</p>
+    <div class="search_body">
+        <div class="search_input">
+            <div class="search_input_wrapper">
+                <i class="iconfont icon-search"></i>
+                <input type="text">
+            </div>
+        </div>
+        <div class="search_result">
+            <h3>电影/电视剧/综艺</h3>
+            <ul>
+                <li>
+                  <div class="img"><img src="/images/yujianni.jpg" alt=""></div>
+                  <div class="info">
+                  <p><span class="theme">今生只为遇见你</span>
+                  <p>爱情，戏剧，犯罪</p>
+                  <p>2018-11-18</p>
                   </div>
-                  </li>
-              </ul>
-          </div>
-      </div>
+                  <div class="grade">
+                    9.2
+                  </div>
+                </li>
+                <li>
+                  <div class="img"><img src="/images/yujianni.jpg" alt=""></div>
+                  <div class="info">
+                  <p><span class="theme">今生只为遇见你</span>
+                  <p>爱情，戏剧，犯罪</p>
+                  <p>2018-11-18</p>
+                  </div>
+                  <div class="grade">
+                    9.2
+                  </div>
+                </li>
+            </ul>
+        </div>
   </div>
 </template>
 
@@ -37,6 +48,86 @@ export default {
 
 </script>
 
-<style lang='scss'>
-
+<style lang='scss' scoped>
+.search_body{
+  -webkit-box-flex: 1;
+  flex: 1;
+  overflow: auto;
+  .search_input{
+    padding: 8px 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    .search_input_wrapper{
+      padding: 0 10px;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      background-color: #fff;
+      display: flex;
+      line-height: 20px;
+      i{
+        font-size: 16px;
+        padding: 4px 0;
+      }
+      input{
+        border: none;
+        font-size: 13px;
+        color: #333;
+        padding: 4px 0;
+        outline: none;
+        margin-left: 5px;
+        width: 100%;
+      }
+    }
+  }
+  .search_result{
+    h3{
+      font-size: 15px;
+      color: #999;
+      padding: 9px 15px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    ul li{
+            margin-top: 12px;
+            display: flex;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 10px;
+            align-items: center;
+            .img{
+                width: 64px;
+                height: 90px;
+                img{
+                    width: 100%;
+                }
+            }
+            .info{
+                margin-left: 10px;
+                flex: 1;
+                .theme{
+                    font-weight: 700;
+                    font-size: 17px;
+                    line-height: 24px;
+                    color: black;
+                    width: 150px;
+                    overflow: hidden;
+                    white-space: nowrap; //不让内容换行
+                    text-overflow: ellipsis;  //添加省略号
+                }
+                p{
+                    font-size: 13px;
+                    color: #666;
+                    line-height: 22px;
+                    width: 200px;
+                    white-space: nowrap; 
+                    text-overflow: ellipsis;
+                }
+            }
+            .grade{
+              font-weight: 700;
+              color: #faaf00;
+              font-size: 15px;
+              align-self: flex-start;
+            }
+    }
+  }
+}
 </style>
