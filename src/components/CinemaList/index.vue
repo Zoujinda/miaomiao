@@ -3,102 +3,17 @@
     <div class="cinema_body">
         <div class="wrapper">
             <ul>
-                <li>
+                <li v-for="data in cinemaList" :key="data.id">
                     <div>
-                        <span>大地影院(一方城店)</span>
-                        <span class="q"><span class="price">22.9</span>元起</span>
+                        <span>{{data.name}}</span>
+                        <span class="q"><span class="price">{{data.price}}</span>元起</span>
                     </div>
                     <div class="address">
-                        <span>宝安区裕安一路365号一方城3层</span>
-                        <span>177km</span>
+                        <span>{{data.address}}</span>
+                        <span>{{data.distance}}</span>
                     </div>
                     <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <span>益达影院(万达店))</span>
-                        <span class="q"> <span class="price">22.9</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>龙岗区坂田街道365号万达广场5楼</span>
-                        <span>1km</span>
-                    </div>
-                    <div class="card">
-                        <div class="or">小吃</div>
-                        <div class="bl">折扣卡</div>
+                        <div v-for="(value,key) in data.tag" :key="key" v-if="value" :class="key | classCard(key)">{{key | formatCard(key)}}</div>
                     </div>
                 </li>
             </ul>
@@ -111,7 +26,53 @@ export default {
     name:"CinemaList",
   data () {
     return {
+        cinemaList:[]
     }
+  },
+  mounted() {
+      this.getCinema();
+  },
+  methods:{
+      getCinema() {
+          this.axios.get('http://localhost:8080/static/cinemalist.json').then((response) => {
+                console.log(response);
+                this.cinemaList = response.data.data.cinema;
+                console.log(this.cinemaList);
+            }, response => {
+                console.log("error");
+            });
+      }
+  },
+  filters:{
+      formatCard(key) {
+          let card = [
+              { key : "allowRefound" , value : "改签" },
+              { key : "endorse" , value : "退" },
+              { key : "sell" , value : "折扣卡" },
+              { key : "snack" , value : "小吃" }
+          ];
+        for(let i = 0;i<card.length;i++){
+            if(card[i].key == key){
+                return card[i].value;
+            }
+        }
+         return '';
+      },
+      classCard(key) {
+          let cardClass = [
+              { key : "allowRefound" , value : "or" },
+              { key : "endorse" , value : "or" },
+              { key : "sell" , value : "bl" },
+              { key : "snack" , value : "bl" }
+          ];
+        for(let i = 0;i<cardClass.length;i++){
+            if(cardClass[i].key === key){
+                return cardClass[i].value;
+                //如果这里加上else{return '';}那么在动态传入key中，第二个开始全部都执行else中的逻辑就结束了，所以不能在这里加
+            }
+        }
+         return '';
+      }
   }
 }
 
@@ -156,10 +117,12 @@ export default {
                         padding: 0 3px;
                         height: 15px;
                         border-radius: 2px;
-                        color: #f90;
-                        border: 1px solid #f90;
                         font-size: 13px;
                         margin-right: 5px;
+                    }
+                    .or{
+                        color: #f90;
+                        border: 1px solid #f90;
                     }
                     .bl{
                         color: #589daf;

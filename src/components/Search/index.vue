@@ -4,32 +4,21 @@
         <div class="search_input">
             <div class="search_input_wrapper">
                 <i class="iconfont icon-search"></i>
-                <input type="text">
+                <input type="text" v-model="message">
             </div>
         </div>
         <div class="search_result">
             <h3>电影/电视剧/综艺</h3>
             <ul>
-                <li>
-                  <div class="img"><img src="/images/yujianni.jpg" alt=""></div>
+                <li v-for="data in movieList" :key="data.id">
+                  <div class="img"><img :src="data.img" alt=""></div>
                   <div class="info">
-                  <p><span class="theme">今生只为遇见你</span>
-                  <p>爱情，戏剧，犯罪</p>
-                  <p>2018-11-18</p>
+                  <p><span class="theme">{{data.moviename}}</span>
+                  <p>{{data.movietype}}</p>
+                  <p>{{data.playtimes}}</p>
                   </div>
                   <div class="grade">
-                    9.2
-                  </div>
-                </li>
-                <li>
-                  <div class="img"><img src="/images/yujianni.jpg" alt=""></div>
-                  <div class="info">
-                  <p><span class="theme">今生只为遇见你</span>
-                  <p>爱情，戏剧，犯罪</p>
-                  <p>2018-11-18</p>
-                  </div>
-                  <div class="grade">
-                    9.2
+                    {{data.grade}}
                   </div>
                 </li>
             </ul>
@@ -42,7 +31,36 @@ export default {
     name:"Search",
   data () {
     return {
+      message:'',
+      movieList:[]
     }
+  },
+  watch: {
+    message(value) {
+      let that = this;
+      this.cancelRequest();
+      this.axios.get(`http://localhost:8080/static/search&kw=${value}.json`,{
+                cancelToken: new this.axios.CancelToken(function(c){
+                    that.source = c;
+                })
+                }).then((res) => {
+          this.movieList = res.data.data.movieList;  
+      }).catch((err) => {
+        if(this.axios.isCancel(err)){
+          console.log('Rquest canceled',err.message);//请求如果被取消，这里是返回取消的message
+        }else{
+          this.movieList = [];
+        }
+        
+      })
+    }
+  },
+  methods:{
+    cancelRequest(){
+            if(typeof this.source ==='function'){
+                this.source('终止请求')
+            }
+        }
   }
 }
 
@@ -96,7 +114,8 @@ export default {
                 width: 64px;
                 height: 90px;
                 img{
-                    width: 100%;
+                    width: 64px;
+                    height: 90px;
                 }
             }
             .info{

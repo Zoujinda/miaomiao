@@ -1,0 +1,80 @@
+{
+    "msg":"ok",
+    "status":0,
+    "data":{
+        "movieList":[
+            {
+                "id": 100000,
+                "img": "../images/beiping.jpg",
+                "moviename": "北平会馆",
+                "grade": 9.0,
+                "actor": "吴大可,朱梓瑜,刘亦彤",
+                "playtimes":"今日已放映231场"
+            },
+            {
+                "id": 100001,
+                "img": "../images/chenxiang.jpg",
+                "moviename": "沉香",
+                "grade": 8.2,
+                "actor": "朱仲春,尹航,梁靖晨",
+                "playtimes":"今日已放映500场"
+            },
+            {
+                "id": 100002,
+                "img": "../images/zhanzhuxiaotou.jpg",
+                "moviename": "站住！小偷",
+                "grade": 0,
+                "actor": "郑云,梁小龙,尤勇",
+                "playtimes":"今日已放映257场"
+            },
+            {
+                "id": 100003,
+                "img": "../images/fennu.jpg",
+                "moviename": "愤怒的心",
+                "grade": 8.9,
+                "actor": "吴琼，阳蕾，王之民",
+                "playtimes":"今日已放映27场"
+            },
+            {
+                "id": 100004,
+                "img": "../images/tiaojiushi.jpg",
+                "moviename": "小公主艾薇拉与神秘王国",
+                "grade": 0,
+                "actor": "莉莉,白雪,玲珑",
+                "playtimes":"今日已放映157场"
+            },
+            {
+                "id": 100005,
+                "img": "../images/zhanzhuxiaotou.jpg",
+                "moviename": "六人-泰坦尼克号上的故事",
+                "grade": 6.0,
+                "actor": "詹姆斯·卡梅隆,施万克,方国民",
+                "playtimes":"今日已放映443场"
+            },
+            {
+                "id": 100006,
+                "img": "../images/tiaojiushi.jpg",
+                "moviename": "调酒师",
+                "grade": 9.5,
+                "actor": "刘挺,陆莹,张如意",
+                "playtimes":"今日已放映659场"
+            },
+            {
+                "id": 100007,
+                "img": "../images/qimiao.jpg",
+                "moviename": "奇妙王国之魔法奇缘",
+                "grade": 7.8,
+                "actor": "卢瑶，张洋，陈新玥",
+                "playtimes":"今日已放映257场"
+            },
+            {
+                "id": 100008,
+                "img": "../images/zhanzhuxiaotou.jpg",
+                "moviename": "今生只为遇见你",
+                "grade": 9.5,
+                "actor": "田志斌,于苏桐,何海蓝",
+                "playtimes":"今日已放映787场"
+            }
+        ]
+    }
+}

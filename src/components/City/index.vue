@@ -5,71 +5,21 @@
             <div class="city_hot">
                 <h2>热门城市</h2>
                 <ul class="clearfix">
-                    <li>深圳</li>
-                    <li>北京</li>
-                    <li>上海</li>
-                    <li>广州</li>
-                    <li>东莞</li>
-                    <li>济南</li>
-                    <li>杭州</li>
-                    <li>成都</li>
+                    <li v-for="data in hotCity" :key="data.id">{{data.hotcity}}</li>
                 </ul>
             </div>
-            <div class="city_sort">
-                <div>
-                    <h2>A</h2>
+            <div class="city_sort" ref="city_sort">
+                <div v-for="city in datalist" :key="city.idx">
+                    <h2>{{city.idx}}</h2>
                     <ul>
-                        <li>阿拉兽盟</li>
-                        <li>鞍山</li>
-                        <li>安庆</li>
-                        <li>安庆</li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>B</h2>
-                    <ul>
-                        <li>北京</li>
-                        <li>保定</li>
-                        <li>包头</li>
-                        <li>白山</li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>C</h2>
-                    <ul>
-                        <li>重庆</li>
-                        <li>承德</li>
-                        <li>长春</li>
-                        <li>从化</li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>D</h2>
-                    <ul>
-                        <li>东莞</li>
-                        <li>大连</li>
-                        <li>丹东</li>
-                        <li>大理</li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>E</h2>
-                    <ul>
-                        <li>恩平</li>
-                        <li>恩施</li>
-                        <li>鄂尔多斯</li>
-                        <li>峨眉山</li>
+                        <li v-for="nameList in city.cities" :key="nameList.id">{{nameList.name}}</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="city_index">
                 <ul>
-                    <li>A</li>
-                    <li>B</li>
-                    <li>C</li>
-                    <li>D</li>
-                    <li>E</li>
+                    <li v-for="(firstAlp,index) in datalist" :key="firstAlp.idx" @touchstart="toIndex(index)">{{firstAlp.idx}}</li>
                 </ul>
         </div>
     </div>
@@ -78,8 +28,50 @@
 <script>
 export default {
     name:"City",
+    mounted(){
+        this.getData();
+    },
+    methods:{
+        getData() {
+            this.axios.get('http://localhost:8080/static/city_list.json').then((response) => {
+                console.log(response);
+                this.datalist = response.data.cityList;
+                console.log(this.datalist);
+            }, response => {
+                console.log("error");
+            });
+        },
+        toIndex(index) {
+            let h2=this.$refs.city_sort.getElementsByTagName('h2');
+            this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
+        }
+    },
+    
   data () {
     return {
+        datalist:[],
+        hotCity:[
+            {
+                hotcity:"深圳",
+                id:11
+            },
+            {
+                hotcity:"北京",
+                id:3
+            },
+            {
+                hotcity:"上海",
+                id:1
+            },
+            {
+                hotcity:"广州",
+                id:4
+            },
+            {
+                hotcity:"东莞",
+                id:51
+            }
+        ]
     }
   }
 }

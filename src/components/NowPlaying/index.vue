@@ -2,105 +2,19 @@
 <template>
     <div class="movie_body">
         <ul>
-            <li>
-                <div class="pic_show"><img src="/images/tiaojiushi.jpg" alt=""></div>
+            <li v-for="data in movieList" :key="data.id">
+                <div class="pic_show"><img :src="data.img" alt=""></div>
                 <div class="info_list">
-                    <h2>调酒师</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：刘挺,陆莹,张如意</p>
+                    <h2>{{data.moviename}}</h2>
+                    <p>观众评分：<span class="grade">{{data.grade}}</span></p>
+                    <p>主演：{{data.actor}}</p>
+                    <p>{{data.playtimes}}</p>
                 </div>
                 <div class="btn_buy">
                     购票
                 </div>
             </li>
-           <li>
-                <div class="pic_show"><img src="/images/chenxiang.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>沉香</h2>
-                    <p>观众评分：<span class="grade">8.2</span></p>
-                    <p>主演：朱仲春,尹航,梁靖晨</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/zhanzhuxiaotou.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>站住！小偷</h2>
-                    <p>观众评分：<span class="grade">0</span></p>
-                    <p>主演：郑云,梁小龙,尤勇</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/yujianni.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>今生只为遇见你</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：田志斌,于苏桐,何海蓝</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/beiping.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>北平会馆</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：吴大可,朱梓瑜,刘亦彤</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/liuren.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>六人-泰坦尼克号上的故事</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：詹姆斯·卡梅隆,施万克,方国民</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/tiaojiushi.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>小公主艾薇拉与神秘王国</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/fennu.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>愤怒的心</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：吴琼，阳蕾，王之民</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-            <li>
-                <div class="pic_show"><img src="/images/qimiao.jpg" alt=""></div>
-                <div class="info_list">
-                    <h2>奇妙王国之魔法奇缘</h2>
-                    <p>观众评分：<span class="grade">9.2</span></p>
-                    <p>主演：卢瑶，张洋，陈新玥</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
+           
         </ul>
     </div>
 </template>
@@ -108,9 +22,26 @@
 <script>
 export default {
     name:"NowPlaying",
+    mounted(){
+        this.getMovie();
+    },
   data () {
     return {
+        movieList:[]
     }
+  },
+  methods:{
+      getMovie() {
+          this.axios.get('http://localhost:8080/static/nowmovie.json').then((response) => {
+                console.log(response);
+                if(response.data.msg === "ok"){
+                    this.movieList = response.data.data.movieList;
+                    console.log(this.movieList);
+                }
+            }, response => {
+                console.log("error");
+            });
+      }
   }
 }
 
