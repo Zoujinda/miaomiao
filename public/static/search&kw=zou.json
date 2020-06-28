@@ -1,0 +1,35 @@
+{
+    "msg":"ok",
+    "status":0,
+    "data":{
+        "movieList":[
+            {
+                "id": 100000,
+                "img": "../images/beiping.jpg",
+                "moviename": "北平会馆",
+                "grade": 9.0,
+                "actor": "吴大可,朱梓瑜,刘亦彤",
+                "playtimes":"今日已放映231场",
+                "movietype":"剧情,喜剧,犯罪"
+            },
+            {
+                "id": 100001,
+                "img": "../images/chenxiang.jpg",
+                "moviename": "沉香",
+                "grade": 8.2,
+                "actor": "朱仲春,尹航,梁靖晨",
+                "playtimes":"今日已放映500场",
+                "movietype":"剧情,喜剧,犯罪"
+            },
+            {
+                "id": 100002,
+                "img": "../images/zhanzhuxiaotou.jpg",
+                "moviename": "站住！小偷",
+                "grade": 0,
+                "actor": "郑云,梁小龙,尤勇",
+                "playtimes":"今日已放映257场",
+                "movietype":"剧情,喜剧,犯罪"
+            }
+        ]
+    }
+}

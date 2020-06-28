@@ -1,0 +1,86 @@
+{
+    "msg":"ok",
+    "status":0,
+    "data":{
+        "cinema":[
+            {
+                "id": 1,
+                "name": "大地影院(一方城店)",
+                "address": "宝安区裕安一路365号一方城3层",
+                "price": "22.9",
+                "distance": "101km",
+                "tag":{
+                    "allowRefound": 1,
+                    "endorse": 1,
+                    "sell": 1,
+                    "snack": 1
+                }
+            },
+            {
+                "id": 2,
+                "name": "益达影院(万达店))",
+                "address": "龙岗区坂田街道365号万达广场5楼",
+                "price": "22.9",
+                "distance": "11km",
+                "tag":{
+                    "allowRefound": 1,
+                    "endorse": 1,
+                    "sell": 0,
+                    "snack": 1
+                }
+            },
+            {
+                "id": 3,
+                "name": "益达影院(万达店))",
+                "address": "龙岗区坂田街道365号万达广场5楼",
+                "price": "22.9",
+                "distance": "11km",
+                "tag":{
+                    "allowRefound": 1,
+                    "endorse": 1,
+                    "sell": 1,
+                    "snack": 1
+                }
+            },
+            {
+                "id": 4,
+                "name": "益达影院(万达店))",
+                "address": "龙岗区坂田街道365号万达广场5楼",
+                "price": "22.9",
+                "distance": "11km",
+                "tag":{
+                    "allowRefound": 1,
+                    "endorse": 1,
+                    "sell": 1,
+                    "snack": 0
+                }
+            },
+            {
+                "id": 5,
+                "name": "益达影院(万达店))",
+                "address": "龙岗区坂田街道365号万达广场5楼",
+                "price": "22.9",
+                "distance": "11km",
+                "tag":{
+                    "allowRefound": 0,
+                    "endorse": 1,
+                    "sell": 1,
+                    "snack": 1
+                }
+            },
+            {
+                "id": 6,
+                "name": "益达影院(万达店))",
+                "address": "龙岗区坂田街道365号万达广场5楼",
+                "price": "22.9",
+                "distance": "11km",
+                "tag":{
+                    "allowRefound": 1,
+                    "endorse": 0,
+                    "sell": 0,
+                    "snack": 1
+                }
+            }
+        ]
+    }
+}
