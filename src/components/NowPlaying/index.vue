@@ -1,46 +1,90 @@
 <!--  -->
 <template>
-    <div class="movie_body">
-        <ul>
-            <li v-for="data in movieList" :key="data.id">
-                <div class="pic_show"><img :src="data.img" alt=""></div>
-                <div class="info_list">
-                    <h2>{{data.moviename}}</h2>
-                    <p>观众评分：<span class="grade">{{data.grade}}</span></p>
-                    <p>主演：{{data.actor}}</p>
-                    <p>{{data.playtimes}}</p>
-                </div>
-                <div class="btn_buy">
-                    购票
-                </div>
-            </li>
-           
-        </ul>
+    <div class="movie_body" ref="movie_body">
+        <Loading v-if="isLoading"></Loading>
+        <Scroller v-else :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd">
+            <ul>
+                <li class="pullDown">{{pullDownMsg}}</li>
+                <li v-for="data in movieList" :key="data.id">
+                    <div class="pic_show" @tap="toDetail()"><img :src="data.img" alt=""></div>
+                    <div class="info_list">
+                        <h2>{{data.moviename}}</h2>
+                        <p>观众评分：<span class="grade">{{data.grade}}</span></p>
+                        <p>主演：{{data.actor}}</p>
+                        <p>{{data.playtimes}}</p>
+                    </div>
+                    <div class="btn_buy">
+                        购票
+                    </div>
+                </li>
+            </ul>
+        </Scroller>
     </div>
 </template>
 
 <script>
+import Scroller from '@/components/Scroller';
 export default {
     name:"NowPlaying",
-    mounted(){
-        this.getMovie();
-    },
-  data () {
-    return {
-        movieList:[]
-    }
-  },
-  methods:{
-      getMovie() {
-          this.axios.get('http://localhost:8080/static/nowmovie.json').then((response) => {
-                console.log(response);
+    activated() {
+        let cityId = this.$store.state.city.id;
+        if(this.beforeCity === cityId){
+            return;
+        }else{
+            this.isLoading = true;
+            setTimeout(() => {
+              this.axios.get(`http://localhost:8080/static/nowmovie=${cityId}.json`).then((response) => {
                 if(response.data.msg === "ok"){
                     this.movieList = response.data.data.movieList;
-                    console.log(this.movieList);
+                    this.isLoading = false;
+                    this.beforeCity = cityId;
                 }
             }, response => {
                 console.log("error");
+                alert('暂无影片信息请选择其他地区');
+                this.movieList = [];
+                this.isLoading = false;
             });
+          },2000);
+        }
+    },
+  data () {
+    return {
+        movieList:[],
+        pullDownMsg:'',
+        isLoading:true,
+        beforeCity: -1
+    }
+  },
+  methods:{
+    //   getMovie() {
+    //       setTimeout(() => {
+    //           this.axios.get('http://localhost:8080/static/nowmovie.json').then((response) => {
+    //             if(response.data.msg === "ok"){
+    //                 this.movieList = response.data.data.movieList;
+    //                 this.isLoading = false;
+    //                 window.localStorage.setItem('nowplayList',JSON.stringify(this.movieList));
+    //             }
+    //         }, response => {
+    //             console.log("error");
+    //         });
+    //       },2000);
+    //   },
+      handleToScroll(pos){
+          if(pos.y > 30){
+            this.pullDownMsg = '正在更新中';
+        }
+      },
+      handleToTouchEnd(pos){
+          if(pos.y > 30){
+            this.pullDownMsg = '更新成功';
+            setTimeout(() =>{
+                this.pullDownMsg = '';
+            },1000);
+        }
+      },
+      toDetail() {
+          console.log('toDetail');
       }
   }
 }
@@ -52,7 +96,12 @@ export default {
     flex: 1;
     overflow: auto;
     ul{
-        height: 100%;
+        .pullDown{
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        overflow: hidden;
         margin: 0 12px;
         li{
             margin-top: 12px;

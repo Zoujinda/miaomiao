@@ -1,56 +1,70 @@
 <!--  -->
 <template>
       <div class="movie_body">
-          <ul>
-            <li v-for="data in movieList" :key="data.id">
-                <div class="pic_show"><img :src="data.img" alt=""></div>
-                <div class="info_list">
-                    <h2>{{data.moviename}}</h2>
-                    <p>期待指数：<span class="grade">{{data.expectgrade}}</span></p>
-                    <p>主演：{{data.actor}}</p>
-                    <p>上映时间：{{data.comingtime}}</p>
-                </div>
-                <div class="btn_buy">
-                    预售
-                </div>
-            </li>
-        </ul>
+          <Loading v-if="isLoading"></Loading>
+          <Scroller v-else>
+            <ul>
+                <li v-for="data in movieList" :key="data.id">
+                    <div class="pic_show"><img :src="data.img" alt=""></div>
+                    <div class="info_list">
+                        <h2>{{data.moviename}}</h2>
+                        <p>期待指数：<span class="grade">{{data.expectgrade}}</span></p>
+                        <p>主演：{{data.actor}}</p>
+                        <p>上映时间：{{data.comingtime}}</p>
+                    </div>
+                    <div class="btn_buy">
+                        预售
+                    </div>
+                </li>
+            </ul>
+        </Scroller>
       </div>
 </template>
 
 <script>
 export default {
     name:"ComingSoon",
-    mounted(){
-        this.getMovie();
-    },
-  data () {
-    return {
-        movieList:[]
-    }
-  },
-  methods:{
-      getMovie(){
-          this.axios.get('http://localhost:8080/static/comingmovie.json').then((response) => {
+    activated(){
+        let cityId = this.$store.state.city.id;
+        if(this.beforeCity === cityId){
+            return ;
+        }else{
+            this.isLoading = true;
+            setTimeout(()=> {
+                //这里可以获取city的id后动态的发送请求
+              this.axios.get('http://localhost:8080/static/comingmovie.json').then((response) => {
                  if(response.data.msg === "ok"){
                     this.movieList = response.data.data.movieList;
-                    console.log(this.movieList);
+                    this.isLoading = false;
+                    this.beforeCity = cityId;
                  }
             }, response => {
                 console.log("error");
+                alert('暂无影片信息请选择其他地区');
             });
-      }
+          },2000);
+        }
+    },
+  data () {
+    return {
+        movieList:[],
+        isLoading:true,
+        beforeCity: -1
+    }
+  },
+  methods:{
+      
   }
 }
 
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .movie_body{
     flex: 1;
     overflow: auto;
     ul{
-        height: 100%;
+        overflow: hidden;
         margin: 0 12px;
         li{
             margin-top: 12px;

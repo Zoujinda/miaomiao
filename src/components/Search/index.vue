@@ -39,6 +39,7 @@ export default {
     message(value) {
       let that = this;
       this.cancelRequest();
+      //这里可以获取当前city的id发送请求
       this.axios.get(`http://localhost:8080/static/search&kw=${value}.json`,{
                 cancelToken: new this.axios.CancelToken(function(c){
                     that.source = c;

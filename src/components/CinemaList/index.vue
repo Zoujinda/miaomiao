@@ -2,21 +2,24 @@
 <template>
     <div class="cinema_body">
         <div class="wrapper">
-            <ul>
-                <li v-for="data in cinemaList" :key="data.id">
-                    <div>
-                        <span>{{data.name}}</span>
-                        <span class="q"><span class="price">{{data.price}}</span>元起</span>
-                    </div>
-                    <div class="address">
-                        <span>{{data.address}}</span>
-                        <span>{{data.distance}}</span>
-                    </div>
-                    <div class="card">
-                        <div v-for="(value,key) in data.tag" :key="key" v-if="value" :class="key | classCard(key)">{{key | formatCard(key)}}</div>
-                    </div>
-                </li>
-            </ul>
+            <Loading v-if="isLoading"></Loading>
+            <Scroller v-else>
+                <ul>
+                    <li v-for="data in cinemaList" :key="data.id">
+                        <div>
+                            <span>{{data.name}}</span>
+                            <span class="q"><span class="price">{{data.price}}</span>元起</span>
+                        </div>
+                        <div class="address">
+                            <span>{{data.address}}</span>
+                            <span>{{data.distance}}</span>
+                        </div>
+                        <div class="card">
+                            <div v-for="(value,key) in data.tag" :key="key" v-if="value" :class="key | classCard(key)">{{key | formatCard(key)}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </Scroller>
         </div>
     </div>
 </template>
@@ -26,19 +29,26 @@ export default {
     name:"CinemaList",
   data () {
     return {
-        cinemaList:[]
+        cinemaList:[],
+        isLoading:true
     }
   },
   mounted() {
-      this.getCinema();
+      let cinemaList = window.localStorage.getItem('cinemaList');
+      if(cinemaList){
+          this.cinemaList = JSON.parse(cinemaList);
+          this.isLoading = false;
+      }else{
+          this.getCinema();
+      }
   },
   methods:{
       getCinema() {
           this.axios.get('http://localhost:8080/static/cinemalist.json').then((response) => {
-                console.log(response);
                 this.cinemaList = response.data.data.cinema;
-                console.log(this.cinemaList);
-            }, response => {
+                window.localStorage.setItem('cinemaList',JSON.stringify(this.cinemaList));
+                this.isLoading = false;
+            }, (error) => {
                 console.log("error");
             });
       }
